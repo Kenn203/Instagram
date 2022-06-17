@@ -22,16 +22,20 @@ import java.util.List;
 public class FeedActivity extends AppCompatActivity {
 
 
-    ParseQuery<Post> query;
-   protected PostsAdapter adapter;
-   protected List<Post> allPosts;
-   RecyclerView rvPosts;
+       ParseQuery<Post> query;
+       protected PostsAdapter adapter;
+       protected List<Post> allPosts;
+       RecyclerView rvPosts;
+       SwipeRefreshLayout swipeContainer;
+       int offset = 0;
+       int currentLimit = 0;
+       private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-
+        //queryPosts(currentLimit);
         rvPosts = findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(this, allPosts);
